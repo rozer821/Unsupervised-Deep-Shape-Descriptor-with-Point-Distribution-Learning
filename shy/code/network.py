@@ -1,0 +1,88 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class HandFeature(nn.Module):
+    def __init__(self, size_z, num_point):
+        super(HandFeature, self).__init__()
+        size_kernel = 1
+        size_pad = 0
+
+        self.size_z = size_z
+        self.num_point = num_point
+        self.conv1 = torch.nn.Conv1d(3 + self.size_z, 256, size_kernel, padding=size_pad)
+        self.conv2 = torch.nn.Conv1d(256, 128, size_kernel, padding=size_pad)
+        self.conv3 = torch.nn.Conv1d(128, 3, size_kernel, padding=size_pad)
+
+        self.conv4 = torch.nn.Conv1d(3 + self.size_z, 256, size_kernel, padding=size_pad)
+        self.conv5 = torch.nn.Conv1d(256, 128, size_kernel, padding=size_pad)
+        self.conv6 = torch.nn.Conv1d(128, 3, size_kernel, padding=size_pad)
+        
+        self.ln0 = nn.LayerNorm((self.size_z, num_point))
+        self.ln1 = nn.LayerNorm((256, num_point))
+        self.ln2 = nn.LayerNorm((128, num_point))
+        self.ln3 = nn.LayerNorm((3, num_point))
+        self.ln4 = nn.LayerNorm((256, num_point))
+        self.ln5 = nn.LayerNorm((128, num_point))
+        self.ln6 = nn.LayerNorm((3, num_point))
+
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(0.0)
+
+    def forward(self, x, z):
+        z = self.ln0(z)
+        x = torch.cat([z, x], 1)
+        x = self.dropout(F.relu(self.ln1(self.conv1(x))))
+        x = self.dropout(F.relu(self.ln2(self.conv2(x))))
+        x = self.dropout(F.relu(self.ln3(self.conv3(x))))
+        x = torch.cat([z, x], 1)
+        x = self.dropout(F.relu(self.ln4(self.conv4(x))))
+        x = self.dropout(F.relu(self.ln5(self.conv5(x))))
+        x1 = self.dropout((self.ln6(self.conv6(x))))
+        return x1
+
+
+class HandJoints(nn.Module):
+    def __init__(self, size_z, num_point):
+        super(HandJoints, self).__init__()
+        size_kernel = 1
+        size_pad = 0
+
+        self.size_z = size_z
+        self.num_point = num_point
+        self.conv1 = torch.nn.Conv1d(3 + self.size_z, 256, size_kernel, padding=size_pad)
+        self.conv2 = torch.nn.Conv1d(256, 128, size_kernel, padding=size_pad)
+        self.conv3 = torch.nn.Conv1d(128, 3, size_kernel, padding=size_pad)
+
+        self.conv4 = torch.nn.Conv1d(3 + self.size_z, 256, size_kernel, padding=size_pad)
+        self.conv5 = torch.nn.Conv1d(256, 128, size_kernel, padding=size_pad)
+        self.conv6 = torch.nn.Conv1d(512, 512, size_kernel, padding=size_pad)
+        self.conv7 = torch.nn.Conv1d(512, 512, size_kernel, padding=size_pad)
+        self.conv8 = torch.nn.Conv1d(128, 3, size_kernel, padding=size_pad)
+
+        self.ln0 = nn.LayerNorm((self.size_z, num_point))
+        self.ln1 = nn.LayerNorm((256, num_point))
+        self.ln2 = nn.LayerNorm((128, num_point))
+        self.ln3 = nn.LayerNorm((3, num_point))
+        self.ln4 = nn.LayerNorm((256, num_point))
+        self.ln5 = nn.LayerNorm((128, num_point))
+        self.ln6 = nn.LayerNorm((512, num_point))
+        self.ln7 = nn.LayerNorm((512, num_point))
+        self.ln8 = nn.LayerNorm((3, num_point))
+
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(0.0)
+
+    def forward(self, x, z):
+        z = self.ln0(z)
+        x = torch.cat([z, x], 1)
+        x = self.dropout(F.relu(self.ln1(self.conv1(x))))
+        x = self.dropout(F.relu(self.ln2(self.conv2(x))))
+        x = self.dropout(F.relu(self.ln3(self.conv3(x))))
+        x = torch.cat([z, x], 1)
+        x = self.dropout(F.relu(self.ln4(self.conv4(x))))
+        x = self.dropout(F.relu(self.ln5(self.conv5(x))))
+        x = self.dropout(F.relu(self.ln6(self.conv6(x))))
+        x = self.dropout(F.relu(self.ln7(self.conv7(x))))
+        x1 = self.dropout((self.ln8(self.conv8(x))))
+        return x1
