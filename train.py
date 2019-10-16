@@ -36,6 +36,7 @@ if device != 'cpu':
 dataset = ModelNet_aligned('dataset/modelnet40_off_aligned',device,mode='train',downsample_num=opt.sample_num)
 loader = DataLoader(dataset,batch_size=opt.batch_size,shuffle=True)
 
+checkpoint_dir = 'result/'
 latent_vecs = []
 latent_size = opt.latent_size
 
@@ -77,14 +78,17 @@ for epoch in tqdm.tqdm(range(opt.epochs)):
     training_loss_epoch = training_loss/len(loader)
     
     if training_loss_epoch < min_loss:
-        save_name = os.path.join(checkpoint_dir,'model_best.pth')
+        print('New best performance!')
+        save_name = os.path.join(checkpoint_dir,'model_best')
         utils.save_checkpoint(save_name,model,optimizer)
                     
     if (epoch+1) % (opt.log_interval*10) == 0:
         print("Epoch:[%d|%d], training loss:%f"%(epoch,opt.epochs,training_loss_epoch))
         min_loss = training_loss_epoch           
-        save_name = os.path.join(checkpoint_dir,'model_routine.pth')
-        utils.save_checkpoint(save_name,model,optimizer)
+        save_name = os.path.join(checkpoint_dir,'model_routine')
+        utils.save_checkpoint(save_name,model,z,optimizer)
+        
+        
 
     
        
