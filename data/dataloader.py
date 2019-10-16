@@ -38,9 +38,9 @@ def read_off(cur_off,sample_num):
     try: 
         indeces = random.sample(range(len(verts)),sample_num);
         verts = [verts[index] for index in indeces]
-        return torch.FloatTensor(verts)
+        return verts
     except ValueError:
-        pass
+        return None
 
 def show_mesh(pc):
     #print(len(verts),len(verts[0]))
@@ -75,6 +75,7 @@ class ModelNet_aligned(Dataset):
             pc = read_off(file_name,downsample_num).to(device)
             if not pc:
                 continue
+            pc = torch.FloatTensor(pc).to(device)
             self.meshes_gt = torch.cat([self.meshes_gt,pc.unsqueeze(0)]) 
             print('gt:',pc.size(),self.meshes_gt.size())
             
