@@ -3,8 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class ShapeFeature(nn.Module):
+    # [ N*(3+z) ] -> # [ N * 3 ] 
     def __init__(self, size_z, num_point):
-        super(HandFeature, self).__init__()
+        super(ShapeFeature, self).__init__()
         size_kernel = 1
         size_pad = 0
 
@@ -40,3 +41,38 @@ class ShapeFeature(nn.Module):
         x = self.dropout(F.relu(self.ln5(self.conv5(x))))
         x1 = self.dropout((self.ln6(self.conv6(x))))
         return x1
+    
+    
+    
+def get_and_init_FC_layer(din, dout):
+    li = nn.Linear(din, dout)
+    nn.init.xavier_uniform_(
+       li.weight.data, gain=nn.init.calculate_gain('relu'))
+    li.bias.data.fill_(0.)
+    return li
+
+
+def get_MLP_layers(dims, doLastRelu):
+    layers = []
+    for i in range(1, len(dims)):
+        layers.append(get_and_init_FC_layer(dims[i - 1], dims[i]))
+        if i == len(dims) - 1 and not doLastRelu:
+            continue
+        layers.append(nn.ReLU())
+    return layers
+
+'''
+class PointwiseMLP(nn.Sequential):
+    def __init__(self, dims, doLastRelu=False):
+        layers = get_MLP_layers(dims, doLastRelu)
+        super(PointwiseMLP, self).__init__(*layers)
+'''
+
+
+class MLP(nn.Module):
+    def __init__(self, dims):
+        super(MLP, self).__init__()
+        self.mlp = get_MLP_layers(dims, doLastRelu=False)
+
+    def forward(self, x):
+        return self.mlp.forward(x)
