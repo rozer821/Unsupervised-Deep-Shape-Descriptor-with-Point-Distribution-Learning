@@ -34,7 +34,7 @@ def read_off(cur_off,sample_num):
     n_verts, n_faces, n_dontknow = tuple([int(s) for s in file_off.readline().strip().split(' ')])
     verts = [[float(s) for s in file_off.readline().strip().split(' ')] for i_vert in range(n_verts)]
     #faces = [[int(s) for s in file.readline().strip().split(' ')][1:] for i_face in range(n_faces)]
-    print(cur_off,verts.len())
+    #print(cur_off,len(verts))
     try: 
         indeces = random.sample(range(len(verts)),sample_num);
         verts = [verts[index] for index in indeces]
