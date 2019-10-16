@@ -48,14 +48,14 @@ def generate_random(pc,device,sigma=0.5):
     # sigma [1],for controlling the random distance
     # pc_gen [N*3]
     std = sigma
-    pc_gen = torch.zeros(0)
+    pc_gen = torch.zeros(0).to(device)
     for pt in pc:  
         #pt [1*3] x y z
         pt_new = torch.normal(pt, std, out=None).unsqueeze(-1).to(device).transpose(0,1)
         pc_gen = torch.cat([pc_gen, pt_new], 0)
         
         #z=multivaria.pdf(xy, mean=mu, cov=covariance) 
-    return pc_gen.to(device)
+    return pc_gen
                
 class ModelNet_aligned(Dataset):
     def __init__(self,root,device,mode='train',downsample_num=1024):
