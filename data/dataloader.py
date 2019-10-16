@@ -72,7 +72,7 @@ class ModelNet_aligned(Dataset):
         total_num = 0
         for file_name in self.offs:
             
-            pc = read_off(file_name,downsample_num).to(device)
+            pc = read_off(file_name,downsample_num)
             if not pc:
                 continue
             pc = torch.FloatTensor(pc).to(device)
