@@ -80,7 +80,8 @@ class ModelNet_aligned(Dataset):
             
             pc_gen = generate_random(pc,device)
             self.meshes_gen = torch.cat([self.meshes_gen,pc_gen.unsqueeze(0)])
-            print('gen:',pc_gen.size(),self.meshes_gen.size())                                                                                 total_num += 1                                                                      
+            print('gen:',pc_gen.size(),self.meshes_gen.size())
+            total_num += 1                                                                      
             #annot_line = open(file_name+'.annot','r').readlines()
             #annot_angle = [eval(x.strip('\n')) for x in annot_line]
             
