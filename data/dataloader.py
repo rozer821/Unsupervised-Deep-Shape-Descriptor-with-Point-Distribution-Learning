@@ -60,7 +60,7 @@ def generate_random(pc,device,sigma=0.5):
 class ModelNet_aligned(Dataset):
     def __init__(self,root,device,mode='train',downsample_num=1024):
         self.root = root
-        self.offs = glob.glob(root+'/*/' + mode + '/*.off')[:42]
+        self.offs = glob.glob(root+'/*/' + mode + '/*.off')
         self.meshes_gt = torch.zeros(0).to(device)
         self.meshes_gen = torch.zeros(0).to(device)
         
