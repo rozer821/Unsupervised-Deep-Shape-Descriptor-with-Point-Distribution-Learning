@@ -3,10 +3,13 @@ import torch.nn as nn
 
 INF = 1000000
 
-class ChamfersDistance(nn.Module):
+class ChamferDistance(nn.Module):
     '''
     Extensively search to compute the Chamfersdistance. 
     '''
+    def __init__(self):
+        super(ChamferDistance, self).__init__()
+        
     def forward(self, input1, input2, valid1=None, valid2=None):
 
         # input1, input2: BxNxK, BxMxK, K = 3
@@ -46,3 +49,40 @@ class ChamfersDistance(nn.Module):
         loss = dist0 + dist1  
         loss = torch.mean(loss)                 
         return loss
+    
+def registration_loss(obs, valid_obs=None):
+    """
+    Registration consistency
+    obs: <BxLx2> a set of obs frame in the same coordinate system
+    select of frame as reference (ref_id) and the rest as target
+    compute chamfer distance between each target frame and reference
+    valid_obs: <BxL> indics of valid points in obs
+    """
+    criternion = ChamfersDistance()
+    bs = obs.shape[0]
+    ref_id = 0
+    ref_map = obs[ref_id, :, :].unsqueeze(0).expand(bs - 1, -1, -1)
+    valid_ref = valid_obs[ref_id, :].unsqueeze(0).expand(bs - 1, -1)
+
+    tgt_list = list(range(bs))
+    tgt_list.pop(ref_id)
+    tgt_map = obs[tgt_list, :, :]
+    valid_tgt = valid_obs[tgt_list, :]
+
+    loss = criternion(ref_map, tgt_map, valid_ref, valid_tgt)
+    return loss
+
+
+def chamfer_loss(obs, valid_obs=None, seq=2):
+    bs = obs.shape[0]
+    total_step = bs - seq + 1
+    loss = 0.
+    for step in range(total_step):
+        current_obs = obs[step:step + seq]
+        current_valid_obs = valid_obs[step:step + seq]
+
+        current_loss = registration_loss(current_obs, current_valid_obs)
+        loss = loss + current_loss
+
+    loss = loss / total_step
+    return loss
