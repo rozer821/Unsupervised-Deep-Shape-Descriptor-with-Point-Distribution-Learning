@@ -34,10 +34,13 @@ def read_off(cur_off,sample_num):
     n_verts, n_faces, n_dontknow = tuple([int(s) for s in file_off.readline().strip().split(' ')])
     verts = [[float(s) for s in file_off.readline().strip().split(' ')] for i_vert in range(n_verts)]
     #faces = [[int(s) for s in file.readline().strip().split(' ')][1:] for i_face in range(n_faces)]
-    #return verts, faces
-    indeces = random.sample(range(len(verts)),sample_num);
-    verts = [verts[index] for index in indeces]
-    return torch.FloatTensor(verts)
+    print(cur_off,verts.len())
+    try: 
+        indeces = random.sample(range(len(verts)),sample_num);
+        verts = [verts[index] for index in indeces]
+        return torch.FloatTensor(verts)
+    except ValueError:
+        return -1
 
 def show_mesh(pc):
     #print(len(verts),len(verts[0]))
@@ -66,22 +69,24 @@ class ModelNet_aligned(Dataset):
         
         #self.annots = []
         #self.annots_cls=[]
-        
+        total_num = 0
         for file_name in self.offs:
             
             pc = read_off(file_name,downsample_num).to(device)
+            if pc == -1:
+                continue
             self.meshes_gt = torch.cat([self.meshes_gt,pc.unsqueeze(0)]) 
             print('gt:',pc.size(),self.meshes_gt.size())
             
             pc_gen = generate_random(pc,device)
             self.meshes_gen = torch.cat([self.meshes_gen,pc_gen.unsqueeze(0)])
-            print('gen:',pc_gen.size(),self.meshes_gen.size())                                                                                                                                                           
+            print('gen:',pc_gen.size(),self.meshes_gen.size())                                                                                 total_num += 1                                                                      
             #annot_line = open(file_name+'.annot','r').readlines()
             #annot_angle = [eval(x.strip('\n')) for x in annot_line]
             
             #self.annots.append(annot_angle) #useless annots
             #self.annots_cls.append(os.path.split(file_name))
-        self.indices = range(len(self.offs))
+        self.indices = range(total_num)
         #print(self.meshes_gen.size(),self.meshes_gt.size())
         
     def __getitem__(self,index):
