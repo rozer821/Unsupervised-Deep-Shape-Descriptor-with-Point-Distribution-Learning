@@ -15,6 +15,7 @@ from model.networks import *
 from utils import *
 
 parser = argparse.ArgumentParser(description='3D auto decoder for tracking')
+parser.add_argument('-r','--root', type=str, default='dataset/modelnet40_off_aligned', help='data_root')
 parser.add_argument('--batch_size', type=int, default=16, help='training batch size')
 parser.add_argument('--epochs', type=int, default=3000, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
@@ -32,8 +33,8 @@ torch.manual_seed(opt.seed)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if device != 'cpu':
     os.environ["CUDA_VISIBLE_DEVICES"]='0'
-
-dataset = ModelNet_aligned('dataset/modelnet40_off_aligned',device,mode='train',downsample_num=opt.sample_num)
+root = opt.root
+dataset = ModelNet_aligned(root,device,mode='train',downsample_num=opt.sample_num)
 loader = DataLoader(dataset,batch_size=opt.batch_size,shuffle=True)
 
 checkpoint_dir = 'result/'

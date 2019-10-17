@@ -22,18 +22,23 @@ class DeepLatent(nn.Module):
         self.L2_dist = nn.MSELoss()
         self.chamfer_weight = chamfer_weight
     def forward(self, obs, obs_gt, latent):
-        self.obs = deepcopy(obs).transpose(1,2)
-        self.obs_gt = deepcopy(obs_gt).transpose(1,2)
+        latent_repeat = latent.unsqueeze(1).unsqueeze(-1).repeat(1,obs.size()[1],1,obs.size()[-1])
+        self.obs = deepcopy(obs)
+        self.obs_gt = deepcopy(obs_gt)
         
-        #print(latent.size())
-        latent_repeat = latent.unsqueeze(1).repeat(1,obs.size()[1],1).transpose(1,2)
- 
-        #print(self.obs.size(),latent_repeat.size())
-        obs_with_lat = torch.cat([self.obs,latent_repeat], 1)
+        #print(self.obs.size(),self.obs_gt.size(),latent.size(),latent_repeat.size())
+        obs_with_lat = torch.cat([self.obs,latent_repeat], 2)
+        batch_size = self.obs.size()[0]
+        sigma_num = self.obs.size()[1]
+        num_instance = batch_size*sigma_num
+        self.obs = self.obs.view(num_instance,self.obs.size()[2],-1)
+        self.obs_gt = self.obs_gt.view(num_instance,self.obs_gt.size()[2],-1)
+        latent_repeat = latent_repeat.view(num_instance,latent_repeat.size()[2],-1)
         
+        #print(self.obs.size(),self.obs_gt.size(),latent.size(),latent_repeat.size())
         #print(obs_with_lat.size())
         self.obs_est = self.shape_net(obs_with_lat, self.obs, latent_repeat)
-        self.batch_size = obs.size()[0] #
+        #self.batch_size = obs.size()[0] #
         loss = self.compute_loss()
         return loss
 
