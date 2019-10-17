@@ -78,13 +78,15 @@ for epoch in tqdm.tqdm(range(opt.epochs)):
                     
     training_loss_epoch = training_loss/len(loader)
     
+    if (epoch+1) % opt.log_interval == 0:
+        print("Epoch:[%d|%d], training loss:%f"%(epoch,opt.epochs,training_loss_epoch))
+        
     if training_loss_epoch < min_loss:
-        print('New best performance!')
+        print('New best performance! saving')
         save_name = os.path.join(checkpoint_dir,'model_best')
         utils.save_checkpoint(save_name,model,optimizer)
                     
     if (epoch+1) % (opt.log_interval*10) == 0:
-        print("Epoch:[%d|%d], training loss:%f"%(epoch,opt.epochs,training_loss_epoch))
         min_loss = training_loss_epoch           
         save_name = os.path.join(checkpoint_dir,'model_routine')
         utils.save_checkpoint(save_name,model,z,optimizer)
