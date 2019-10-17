@@ -76,7 +76,7 @@ for epoch in tqdm.tqdm(range(opt.epochs)):
         optimizer.step()
         training_loss += loss.item()
                     
-    training_loss_epoch = training_loss/len(loader)
+    training_loss_epoch = training_loss
     
     if (epoch+1) % opt.log_interval == 0:
         print("Epoch:[%d|%d], training loss:%f"%(epoch,opt.epochs,training_loss_epoch))
