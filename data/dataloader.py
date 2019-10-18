@@ -92,6 +92,8 @@ class ModelNet_aligned(Dataset):
         
         if len(self.npys_gen)<=0 or len(self.npys_drift)<=0:
             gen_mesh(root,mode,downsample_num,sample_gen_per_point,sigmas=sigmas)
+            
+        self.npys_gen = glob.glob(os.path.join(root,'random_sample_gt_rate_*' , mode ,'*.npy'))    
         self.sigmas = sigmas
         self.root = root
         self.device = device
@@ -116,7 +118,7 @@ class ModelNet_aligned(Dataset):
             npy_sig = torch.FloatTensor(np.load(template_sigma_file%sig))
             meshes_sigmas = torch.cat([meshes_sigmas,npy_sig.transpose(0,1).unsqueeze(0)],0)
         meshes_gt_repeat = self.meshes_gt[index].unsqueeze(0).repeat(meshes_sigmas.size()[0],1,1)
-        print(meshes_gt_repeat.size(),meshes_sigmas.size(),self.indices[index])
+        #print(meshes_gt_repeat.size(),meshes_sigmas.size(),self.indices[index])
         return meshes_gt_repeat,meshes_sigmas,self.indices[index]
 
     def __len__(self):

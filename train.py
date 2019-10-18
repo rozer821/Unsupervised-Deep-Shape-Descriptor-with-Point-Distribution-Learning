@@ -15,9 +15,9 @@ from model.networks import *
 from utils import *
 
 parser = argparse.ArgumentParser(description='3D auto decoder for tracking')
-parser.add_argument('-r','--root', type=str, default='dataset/modelnet40_off_aligned', help='data_root')
-parser.add_argument('--batch_size', type=int, default=16, help='training batch size')
-parser.add_argument('--epochs', type=int, default=3000, help='number of epochs to train for')
+parser.add_argument('-r','--root', type=str, default='/home/mmvc/mmvc-ny-nas/Yi_Shi/data/modelnet40_off_aligned', help='data_root')
+parser.add_argument('--batch_size', type=int, default=128, help='training batch size')
+parser.add_argument('--epochs', type=int, default=10000, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--debug', default=True, type=lambda x: (str(x).lower() == 'true'),help='load part of the dataset to run quickly')
 parser.add_argument('-y','--latent_size', type=int, default=512, help='length_latent')
@@ -34,10 +34,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if device != 'cpu':
     os.environ["CUDA_VISIBLE_DEVICES"]='0'
 root = opt.root
-dataset = ModelNet_aligned(root,device,mode='train',downsample_num=opt.sample_num)
-loader = DataLoader(dataset,batch_size=opt.batch_size,shuffle=True)
 
-checkpoint_dir = 'result/'
+num_sigmas = 1
+dataset = ModelNet_aligned(root,device,mode='train',downsample_num=opt.sample_num)
+loader = DataLoader(dataset,batch_size=opt.batch_size*num_sigmas,shuffle=True)
+
+checkpoint_dir = 'results/'
 latent_vecs = []
 latent_size = opt.latent_size
 
@@ -69,6 +71,7 @@ for epoch in tqdm.tqdm(range(opt.epochs)):
             latent_inputs = torch.cat([latent_inputs, latent.unsqueeze(1)], 1)
         latent_inputs = latent_inputs.transpose(0,1)
         shape_batch = shape_batch.to(device)
+        shape_gt_batch = shape_gt_batch.to(device)
         loss = model(shape_batch,shape_gt_batch,latent_inputs)
 
         optimizer.zero_grad()
@@ -76,18 +79,18 @@ for epoch in tqdm.tqdm(range(opt.epochs)):
         optimizer.step()
         training_loss += loss.item()
                     
-    training_loss_epoch = training_loss
+    training_loss_epoch = training_loss/len(loader)
     
     if (epoch+1) % opt.log_interval == 0:
         print("Epoch:[%d|%d], training loss:%f"%(epoch,opt.epochs,training_loss_epoch))
         
     if training_loss_epoch < min_loss:
+        min_loss = training_loss_epoch
         print('New best performance! saving')
         save_name = os.path.join(checkpoint_dir,'model_best')
         utils.save_checkpoint(save_name,model,optimizer)
                     
-    if (epoch+1) % (opt.log_interval*10) == 0:
-        min_loss = training_loss_epoch           
+    if (epoch+1) % (opt.log_interval*10) == 0:          
         save_name = os.path.join(checkpoint_dir,'model_routine')
         utils.save_checkpoint(save_name,model,z,optimizer)
         
