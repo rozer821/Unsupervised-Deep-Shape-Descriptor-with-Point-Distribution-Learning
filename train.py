@@ -7,6 +7,7 @@ from matplotlib import cm
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 import torch.optim as optim
+import torch.nn as nn
 
 from data.dataloader import *
 from model.DeepLatent_naive import *
@@ -18,7 +19,7 @@ parser = argparse.ArgumentParser(description='3D auto decoder for tracking')
 parser.add_argument('-r','--root', type=str, default='/home/mmvc/mmvc-ny-nas/Yi_Shi/data/modelnet40_off_aligned', help='data_root')
 parser.add_argument('--batch_size', type=int, default=32, help='training batch size')
 parser.add_argument('--epochs', type=int, default=5000, help='number of epochs to train for')
-parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
+parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--debug', default=True, type=lambda x: (str(x).lower() == 'true'),help='load part of the dataset to run quickly')
 parser.add_argument('-y','--latent_size', type=int, default=64, help='length_latent')
 parser.add_argument('--weight_file', default='', help='path to weights to load')
@@ -36,14 +37,29 @@ os.environ["CUDA_VISIBLE_DEVICES"]='0'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 root = opt.root
 
-num_sigmas = 1
 dataset = ModelNet_aligned(root,device,mode='train',downsample_num=opt.sample_num)
-loader = DataLoader(dataset,batch_size=opt.batch_size*num_sigmas,shuffle=True)
+loader = DataLoader(dataset,batch_size=opt.batch_size,shuffle=True)
 
 checkpoint_dir = 'results/'
-latent_vecs = []
+
 latent_size = opt.latent_size
+num_total_instance = len(dataset)
+print(num_total_instance)
+
 model = DeepLatent(latent_length = latent_size, n_samples = opt.sample_num)
+
+
+#if opt.resume:
+#    model, latent_vecs, optimizer = load_checkpoint(os.path.join(checkpoint_dir,'model_best'),model,optimizer) 
+#else:
+model.to(device)
+
+latent_vecs = []
+for i in range(len(dataset)):
+    vec = (torch.ones(latent_size).normal_(0, 0.8).to(device))
+    vec = torch.nn.Parameter(vec)
+    latent_vecs.append(vec)
+
 optimizer = optim.Adam([
                 {
                      "params":model.parameters(), "lr":opt.lr,
@@ -53,33 +69,37 @@ optimizer = optim.Adam([
                 }
             ]
             )
-if opt.resume:
-    model, latent_vecs, optimizer = load_checkpoint(os.path.join(checkpoint_dir,'model_best'),model,optimizer) 
-else:
-    model.cuda()
-    for i in range(len(dataset)):
-        vec = (torch.ones(latent_size).normal_(0, 0.8).to(device))
-        vec.requires_grad = True
-        latent_vecs.append(vec)
-                    
 min_loss = float('inf')
 for epoch in range(opt.epochs):
     training_loss= 0.0
     model.train()
     for index,(shape_batch,shape_gt_batch,latent_indices) in enumerate(loader):
-        latent_inputs = torch.zeros(0).to(device)
-        for i_lat in latent_indices.cpu().detach().numpy():
-            latent = latent_vecs[i_lat] 
-            latent_inputs = torch.cat([latent_inputs, latent.unsqueeze(0)], 0)
-        latent_repeat = latent_inputs.unsqueeze(-1).repeat(1,1,shape_batch.size()[-1])
+        
+        lats_inds =  latent_indices.cpu().detach().numpy() 
+        
+        latent_inputs = torch.ones((lats_inds.shape[0],opt.latent_size), dtype=torch.float32, requires_grad=True).to(device) 
+        i = 0
+        for i_lat in lats_inds:
+            #latent_inputs = torch.cat([latent_inputs,latent_vecs[i_lat].unsqueeze(0)], 0)
+            latent_inputs[i] *= latent_vecs[i_lat]
+            i += 1
+        #print('---',latent_inputs[0],latent_vecs[lats_inds[0]])
+        #print(latent_inputs.size())
+        latent_repeat = latent_inputs.unsqueeze(-1).expand(-1,-1,shape_batch.size()[-1])
         shape_batch = shape_batch.to(device)
         shape_gt_batch = shape_gt_batch.to(device)
         loss,chamfer,l2 = model(shape_batch,shape_gt_batch,latent_repeat)
         
         optimizer.zero_grad()
         loss.backward()
+        #print(latent_inputs.grad)
+        #print('+++',latent_vecs[lats_inds[0]].grad)
         optimizer.step()
+        #for i_lat in lats_inds:
+        #    latent_vecs[i_lat] -= latent_vecs[lats_inds[0]].grad * opt.lr
+        #print('>>>',latent_inputs[0],latent_vecs[lats_inds[0]])
         training_loss += loss.item()
+        
        
         print("Epoch:[%d|%d], Batch:%d  loss: %f , chamfer: %f, l2: %f"%(epoch,opt.epochs,index,loss.item()/opt.batch_size,chamfer.item()/opt.batch_size,l2.item()/opt.batch_size))
         

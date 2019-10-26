@@ -5,9 +5,13 @@ import numpy as np
 import open3d as o3d
 import tqdm
 import torch
+import math
+from copy import deepcopy
+
 
 #from scipy.stats import multivariate_normal
 from torch.utils.data import Dataset
+from scipy.ndimage.interpolation import rotate
 #import utils
      
 def open_mesh(filename):
@@ -91,7 +95,7 @@ def pc_normalize(pc):
 
 
 class ModelNet_aligned(Dataset):
-    def __init__(self,root,device,mode='train',sigmas =[0.02,0.03],sample_gen_per_point=1,downsample_num=1024):
+    def __init__(self,root,device,mode='train',sigmas =[0.25],sample_gen_per_point=1,downsample_num=1024):
         #print(os.path.join(root,'random_sample_gt_rate_*/' + mode + '/*.npy'))
         self.downsample_num = downsample_num
         self.root = os.path.split(root)[0]+'/gen'
@@ -111,8 +115,51 @@ class ModelNet_aligned(Dataset):
         
         
         
+    def __getitem__(self,index):
+        meshes_gt = np.load(self.npys_gen[index])
+        pc_gt_normalized = pc_normalize(meshes_gt)
+        #template_sigma_file = os.path.join(self.gen_path,'%d_gen_sigma_%.1f',self.mode,name_gt)
+        sig = self.sigmas[random.randint(0,len(self.sigmas)-1)]
+        #if not is_online:
+        #    pc = os.path.join(self.gen_path,'%d_gen_sigma_%.1f',self.mode, name_gt)
+        
+        pc = generate_random(pc_gt_normalized,sigma=sig).tolist()
+        pc_gt_normalized = torch.FloatTensor(pc_gt_normalized).transpose(0,1)
+        pc_gen = torch.FloatTensor(pc).transpose(0,1) 
+            
+        #print(meshes_gt_repeat.size(),meshes_sigmas.size(),self.indices[index])
+        return pc_gen,pc_gt_normalized,self.indices[index]
+    
+    def __len__(self):
+        return len(self.npys_gen)
+    
+    
+class ModelNet_aligned_rotate(Dataset):
+    def __init__(self,root,device,mode='train',sigmas =[0.25],sample_gen_per_point=1,downsample_num=1024):
+        #print(os.path.join(root,'random_sample_gt_rate_*/' + mode + '/*.npy'))
+        self.downsample_num = downsample_num
+        self.root = os.path.split(root)[0]+'/gen'
+        sample_conf = 'random_sample_gt_rate_%d'%self.downsample_num
+        genned_file_path = os.path.join(self.root, sample_conf, mode)
+        print(genned_file_path)
+        self.npys_gen = glob.glob(os.path.join(genned_file_path,'*.npy'))
+            
+        self.sigmas = sigmas
+        self.device = device
+        self.mode = mode
+        self.categ = [os.path.split(i)[-1] for i in glob.glob('/home/mmvc/mmvc-ny-nas/Yi_Shi/data/modelnet40_off_aligned/*')]
+        
+        self.names_instance = [os.path.split(i)[-1].split('.')[0] for i in self.npys_gen]
+        self.categs_instance = ['_'.join(i.split('_')[:-1]) for i in self.names_instance]
+        self.indices = range(len(self.npys_gen))
+        
     def __getitem__(self,index,is_online=True):
         meshes_gt = np.load(self.npys_gen[index])
+        x = deepcopy(meshes_gt[:, 0])
+        y = deepcopy(meshes_gt[:, 1])
+        angle = math.pi/4
+        meshes_gt[:, 0] = math.cos(angle)*x -math.sin(angle)*y
+        meshes_gt[:, 1] = math.cos(angle)*y + math.sin(angle)*x
         pc_gt_normalized = pc_normalize(meshes_gt)
         #template_sigma_file = os.path.join(self.gen_path,'%d_gen_sigma_%.1f',self.mode,name_gt)
         sig = self.sigmas[random.randint(0,len(self.sigmas)-1)]
@@ -130,4 +177,6 @@ class ModelNet_aligned(Dataset):
     
     def __len__(self):
         return len(self.npys_gen)
+    
+
    
