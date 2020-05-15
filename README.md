@@ -3,7 +3,7 @@ This repository contains sampling code for the 'Unsupervised Deep Shape Descript
 
 Data
 ---------------
-In our context, ShapeNet refers to the subset of the whole ShapeNet database which contains 15,011 3D point clouds belongings to 16 categories. Dataset is split to 80% training and 20% testing. This results in 12,137 samples for training set and 2,874 samples for testing set. ShapeNet55 refers to ShapeNetCore55 which contains 55 categories and 57,000 data in total. 
+In our context, ShapeNet refers to the subset of the whole ShapeNet database which contains 15,011 3D point clouds belongings to 16 categories. Dataset is split to 80% training and 20% testing. This results in 12,137 samples for training set and 2,874 samples for testing set. ShapeNet55 refers to ShapeNetCore55 which is a subset contains 55 categories and 57,000 data in total. 
 
 Training and testing setting
 ----------------------
