@@ -1,5 +1,4 @@
-# Unsupervised Deep Shape Descriptor  
-# with Point Distribution Learning 
+# Unsupervised Deep Shape Descriptor with Point Distribution Learning 
 This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. 
 It contains implemetation details and important infomation for training and testing. 
 
