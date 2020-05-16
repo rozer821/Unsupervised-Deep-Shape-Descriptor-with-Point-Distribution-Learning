@@ -47,12 +47,12 @@ loader = DataLoader(dataset,batch_size=opt.batch_size,shuffle=True,num_workers=8
 if opt.load_dir is not None:
     checkpoint_dir = opt.load_dir
 else:
-    checkpoint_dir = 'results/' + opt.name
+    checkpoint_dir = 'results/'
 
 if opt.save_dir is not None:
     save_dir = opt.save_dir
 else:
-    save_dir = 'results/' + opt.name
+    save_dir = 'results/'
 
 latent_size = opt.latent_size
 model = DeepLatent(latent_length = latent_size, n_samples = opt.sample_num)

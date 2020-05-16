@@ -19,7 +19,6 @@ from model.deeplatent import *
 from model.networks import *
 from utils.utils import *
 
-
 def train(model,dataset,device,latent_size,n_samples,if_continue):
     save_dir = dataset.save_dir
     
