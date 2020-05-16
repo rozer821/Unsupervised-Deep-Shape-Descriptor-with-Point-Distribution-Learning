@@ -1,14 +1,13 @@
-# LatentDisc
+# Unsupervised Deep Shape Descriptor with Point Distribution Learning
 This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. It contains implemetation details and important infomation for training and testing. 
 
 ## Data
 For convenience, in our context, ShapeNet refers to the subset of the whole ShapeNet database which contains 15,011 3D point clouds belongings to 16 categories. In official data split, Dataset is split to 12,137 samples for training set and 2,874 samples for testing set. In comparison, ShapeNet55 refers to ShapeNetCore55 which is a subset contains 55 categories and 57,000 data in total.  
 
-&nbsp;### Download
-&nbsp;Training: `wget `
-&nbsp;Testing: https://modelnet.cs.princeton.edu/
+&nbsp;Training: partial categories from ShapeNet 
+&nbsp;Testing: ModelNet40 Aligned 
 
-Training and testing setting
+Training and testing Details
 ----------------------
 During model training, we follow the idea of proving out-of-category capability, so that we choose 7 major (most populous data) categories from ShapeNet. Beware that the learning rate of the descriptors should be higher so that it can capture information rather than overfitting the model itself.       
 During testing (descriptor calculation), the descriptor obtained in the model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. The batch size should be one.
@@ -19,14 +18,31 @@ It is performed on the calculated descriptors that stand for shapes in ModelNet4
 
 Dependencies
 -----------------
-We use Pytorch 1.3 for our model implementation. The evaluation is performed using sklearn and numpy. 
+We use Pytorch 1.3 for our model implementation. 
+
+-matplotlib
+-numpy
+-sklearn
+-open3d
+
+Website
+----------------
+#tolink
 
 Paper
 ----------------
-#todo
+#tolink
 
 Reference
 ---------------
-#todo
+@article{pdl,
+title={Unsupervised Deep Shape Descriptor with Point Distribution Learning},
+author={},
+journal={},
+volume={},
+number={},
+pages={},
+year={2020}
+}
 
 

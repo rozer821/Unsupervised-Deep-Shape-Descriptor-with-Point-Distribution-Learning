@@ -22,7 +22,6 @@ def get_mean_dis(pc):
     print(mean_dis)
     return mean_dis
 
-
 def generate_random_drift(pc,sigma=0.02):
     # pc [N*3] 
     # sigma [1],for controlling the random distance
@@ -42,7 +41,7 @@ class ShapeNet(Dataset):
         self.sigma = sigma
         self.device = device
         self.mode = mode
-        self.train_num = 9198
+        
         if mode=='both':
             data_train = np.load(os.path.join(root,'train','pntcloud_full.npy'))
             data_test = np.load(os.path.join(root,'test','pntcloud_full.npy'))
@@ -50,20 +49,20 @@ class ShapeNet(Dataset):
             label_train = np.load(os.path.join(root,'train','label_full.npy'))
             label_test = np.load(os.path.join(root,'test','label_full.npy'))
             self.label = np.concatenate((label_train,label_test),axis=0)
-            self.train_num = 12137
         else:
             self.data = np.load(os.path.join(root,'train','pntcloud_7.npy'))
             self.label = np.load(os.path.join(root,'train','label_7.npy'))
-            
+        
+        self.train_num = self.label.shape[0]
         self.indices = range(self.data.shape[0])
         
     def __getitem__(self,index,is_online=True):
-        meshes_gt = self.data[index]
+        pc_gt = self.data[index]
         sig = self.sigma
-        pc = generate_random_drift(meshes_gt,sigma=sig).tolist()
+        pc = generate_random_drift(pc_gt,sigma=sig).tolist()
         pc = torch.FloatTensor(pc).transpose(0,1) 
-        meshes_gt = torch.FloatTensor(meshes_gt).transpose(0,1)
-        return pc, meshes_gt, self.indices[index]
+        pc_gt = torch.FloatTensor(pc_gt).transpose(0,1)
+        return pc, pc_gt, self.indices[index]
 
     def __len__(self):
         return len(self.data)
@@ -77,7 +76,7 @@ class ModelNet40(Dataset):
         self.sigma = sigma
         self.device = device
         self.mode = mode
-        self.train_num = 9840
+
         if mode=='both':
             data_train = np.load(os.path.join(root,'train','pntcloud.npy'))
             data_test = np.load(os.path.join(root,'test','pntcloud.npy'))
@@ -85,10 +84,7 @@ class ModelNet40(Dataset):
             label_train = np.load(os.path.join(root,'train','label.npy'))
             label_test = np.load(os.path.join(root,'test','label.npy'))
             self.label = np.concatenate((label_train,label_test),axis=0)
-            #self.train_num = 12308
-        elif len(mode) == 1:
-            self.data = np.load(os.path.join(root,'multi',f'train_pntcloud_{mode}.npy'))
-            self.label = np.load(os.path.join(root,'multi',f'train_label_{mode}.npy'))
+    
         else:
             self.data = np.load(os.path.join(root,mode,'pntcloud.npy'))
             self.label = np.load(os.path.join(root,mode,'label.npy'))
@@ -96,18 +92,15 @@ class ModelNet40(Dataset):
         self.indices = range(self.data.shape[0])
         
     def __getitem__(self,index,is_online=True):
-        meshes_gt = self.data[index]
+        pc_gt = self.data[index]
         sig = self.sigma
-        pc = generate_random_drift(meshes_gt,sigma=sig).tolist()
+        pc = generate_random_drift(pc_gt,sigma=sig).tolist()
         pc = torch.FloatTensor(pc).transpose(0,1) 
-        meshes_gt = torch.FloatTensor(meshes_gt).transpose(0,1)
-        return pc, meshes_gt, self.indices[index]
+        pc_gt = torch.FloatTensor(pc_gt).transpose(0,1)
+        return pc, pc_gt, self.indices[index]
 
     def __len__(self):
         return len(self.data)
-
-
-
 
 ###################################################################################
 
@@ -137,12 +130,12 @@ class ModelNet40_multi(Dataset):
         self.indices = range(self.block_size)
         
     def __getitem__(self,index,is_online=True):
-        meshes_gt = self.data[index]
+        pc_gt = self.data[index]
         sig = self.sigma
-        pc = generate_random_drift(meshes_gt,sigma=sig).tolist()
+        pc = generate_random_drift(pc_gt,sigma=sig).tolist()
         pc = torch.FloatTensor(pc).transpose(0,1) 
-        meshes_gt = torch.FloatTensor(meshes_gt).transpose(0,1)
-        return pc, meshes_gt, self.indices[index]
+        pc_gt = torch.FloatTensor(pc_gt).transpose(0,1)
+        return pc, pc_gt, self.indices[index]
 
     def __len__(self):
         return len(self.data)

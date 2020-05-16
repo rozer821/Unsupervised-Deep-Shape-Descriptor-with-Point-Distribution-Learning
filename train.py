@@ -14,8 +14,8 @@ from model.deeplatent import *
 from model.networks import *
 from utils.utils import *
 
-parser = argparse.ArgumentParser(description='3D auto decoder for tracking')
-parser.add_argument('-r','--root', type=str, default='/home/mmvc/mmvc-ny-nas/Yi_Shi/data/ShapeNet', help='data_root')
+parser = argparse.ArgumentParser(description='3D auto decoder')
+parser.add_argument('-r','--root', type=str, default='datasets/ShapeNet', help='data_dir')
 parser.add_argument('--batch_size', type=int, default=64, help='training batch size')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')

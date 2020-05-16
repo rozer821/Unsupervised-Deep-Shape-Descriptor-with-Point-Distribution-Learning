@@ -32,17 +32,16 @@ def train(model,dataset,device,latent_size,n_samples,if_continue):
         save_name = os.path.join(save_dir,'model_best_test')
         _, z_lst, _ = load_checkpoint(save_name, None, None)
         
-        
         for i in range(len(z_lst)):
             #print(z_lst[i])
-            vec = (torch.ones(latent_size).normal_(0, 0.8).to(device))
+            vec = (torch.ones(latent_size).normal_(0, 0.9).to(device))
             vec.data = z_lst[i].data
             vec.requires_grad = True
             latent_vecs.append(vec)
         
     else:
         for i in range(len(dataset)):
-            vec = (torch.ones(latent_size).normal_(0, 0.8).to(device))
+            vec = (torch.ones(latent_size).normal_(0, 0.9).to(device))
             vec.requires_grad = True
             latent_vecs.append(vec)
         
@@ -81,11 +80,10 @@ def train(model,dataset,device,latent_size,n_samples,if_continue):
         print('process: %d'%dataset.block_num,' epoch: %d'%epoch, ' loss: %d'%training_loss_epoch)
         save_name = os.path.join(save_dir,'model_routine_test')
         save_checkpoint(save_name,model,latent_vecs,optimizer)
-
             
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='3D auto decoder for tracking')
-    parser.add_argument('-r','--root', type=str, default='/home/mmvc/mmvc-ny-nas/Yi_Shi/data/ModelNet40', help='data_root')
+    parser.add_argument('-r','--root', type=str, default='datasets/ModelNet40', help='data_dir')
     parser.add_argument('--batch_size', type=int, default=1, help='testing batch size')
     parser.add_argument('--epochs', type=int, default=100, help='number of epochs to train for')
     #manual stop
@@ -123,9 +121,7 @@ if __name__ == '__main__':
     num_instance = 12308
     block_size = 1000
     num_processes= int(np.ceil(num_instance/block_size))
-    
-    print(num_processes)
-    # NOTE: this is required for the ``fork`` method to work
+   
     model.share_memory()
     processes = []
     for rank in range(num_processes):
@@ -140,7 +136,7 @@ if __name__ == '__main__':
         else:
             cur_block_size = block_size
         
-        dataset = ModelNet40_multi(name,root,device, sigma=opt.sigma,block_num=rank,
+        dataset = ModelNet40_multi(name,root,device,sigma=opt.sigma,block_num=rank,
                                    start = rank*block_size,block_size=cur_block_size)
         
         p = Process(target=train, args=(model,dataset,device,opt.latent_size,opt.sample_num,if_continue))
