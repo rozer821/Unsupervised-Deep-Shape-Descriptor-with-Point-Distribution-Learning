@@ -22,10 +22,10 @@ Dependencies
 -----------------
 We use Pytorch 1.3 for our model implementation. 
 
--matplotlib
--numpy
--sklearn
--open3d
+-matplotlib 
+-numpy 
+-sklearn 
+-open3d 
 
 Website
 ----------------
