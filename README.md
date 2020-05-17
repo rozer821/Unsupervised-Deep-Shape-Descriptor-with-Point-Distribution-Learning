@@ -3,7 +3,9 @@ This repository contains sampling code for the 'Unsupervised Deep Shape Descript
 It contains implemetation details and important infomation for training and testing. 
 
 ## Data
-For convenience, in our context, ShapeNet refers to the subset of the whole ShapeNet database which contains 15,011 3D point clouds belongings to 16 categories. In official data split, Dataset is split to 12,137 samples for training set and 2,874 samples for testing set. In comparison, ShapeNet55 refers to ShapeNetCore55 which is a subset contains 55 categories and 57,000 data in total. 
+For convenience, in our context, ShapeNet refers to the subset of the whole ShapeNet database which contains 15,011 3D point clouds belongings to 16 categories. In official data split, Dataset is split to 12,137 samples for training set and 2,874 samples for testing set.  
+
+In comparison, ShapeNet55 refers to ShapeNetCore55 which is a subset contains 55 categories and 57,000 data in total. 
   
 Training: partial categories from ShapeNet  
 Testing: ModelNet40 Aligned  
@@ -24,9 +26,12 @@ Dependencies
 We use Pytorch 1.3 for our model implementation. 
 
 -matplotlib 
+
 -numpy 
+
 -sklearn 
--open3d 
+
+-open3d  
 
 Website
 ----------------
