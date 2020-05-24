@@ -16,10 +16,6 @@ During model training, we follow the idea of proving out-of-category capability,
    
 During testing (descriptor calculation), the descriptor obtained in the model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. The batch size should be one.
 
-The ModelNet40 evaluation
-----------------
-It is performed on the calculated descriptors of shapes from the entire aligned ModelNet40 during testing.
-
 Dependencies
 -----------------
 We use Pytorch 1.3 for our model implementation.  The evalution is performed with default function provided by sklearn.
