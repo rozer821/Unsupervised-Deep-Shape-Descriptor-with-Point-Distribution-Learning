@@ -43,7 +43,7 @@ Reference
 ---------------
 @article{pdl,
 title={Unsupervised Deep Shape Descriptor with Point Distribution Learning},
-author={},
+author={Shi, Yi and Xu, Mengchen and Yuan, Shuaihang and Fang, Yi},
 journal={},
 volume={},
 number={},
