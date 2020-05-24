@@ -8,7 +8,7 @@ On contrary to using the entire ShapeNet(55) subset contains 55 categories and 5
 Training: [A subset]() consist of 7 categories from ShapeNet.    
 Testing: ModelNet40 Aligned  
 
-In our ablation study evalution, we use the [ShapeNet subset]() with 16 categories and 15000 data in total.
+In our ablation study evalution, we use the [ShapeNet subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) with 16 categories and 15000 data in total.
 
 Training and testing Details
 ----------------------
