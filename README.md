@@ -12,7 +12,7 @@ In our ablation study evalution, we use the [ShapeNet subset](https://drive.goog
 
 Training and testing Details
 ----------------------
-During model training, we follow the idea of proving out-of-category capability, so that we choose 7 majorcategories from ShapeNet. Beware that the learning rate of the descriptors should be higher so that it can capture information rather than overfitting the decoder model itself.    
+During model training, we follow the idea of proving out-of-category capability, so that we choose 7 major categories from ShapeNet. Beware that the learning rate of the descriptors should be higher so that it can capture information rather than overfitting the decoder model itself.    
    
 During testing (descriptor calculation), the descriptor obtained in the model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. The batch size should be one.
 
