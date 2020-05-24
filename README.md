@@ -3,7 +3,7 @@ This repository contains sampling code for the 'Unsupervised Deep Shape Descript
 It contains implemetation details and important infomation for training and testing. You are welcome to use it in different tasks, such as segmentation. 
 
 ## Data
-On contrary to using the entire ShapeNet(55) subset contains 55 categories and 57,000 data in total, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/papers/3dgan_nips.pdf) where only seven categories are used in training and evaluation is on ModelNet40.
+On contrary to using the entire ShapeNet(55) subset contains 55 categories and 57,000 data in total, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories are used in training and evaluation is on ModelNet40.
 
 Training: [A subset]() consist of 7 categories from ShapeNet.    
 Testing: ModelNet40 Aligned  
