@@ -5,7 +5,7 @@ It contains implemetation details and important infomation for training and test
 ## Data
 ; ShapeNet55 refers to ShapeNetCore55 which is a ShapeNet subset contains 55 categories and 57,000 data in total. 
 
-Training: A subset consist of 7 categories from ShapeNet.    
+Training: [A subset]() consist of 7 categories from ShapeNet.    
 Testing: ModelNet40 Aligned  
 
 In our ablation study evalution, we use the [ShapeNet subset]() with 16 categories and 15000 data in total.
