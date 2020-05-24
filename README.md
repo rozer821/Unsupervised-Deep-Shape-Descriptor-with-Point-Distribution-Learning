@@ -5,7 +5,7 @@ It contains implemetation details and important infomation for training and test
 ## Data
 On contrary to using the entire ShapeNet(55) subset contains 55 categories and 57,000 data in total, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories are used in training and evaluation is on ModelNet40.
 
-Training: [A subset]() consist of 7 categories from ShapeNet.    
+Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
 Testing: ModelNet40 Aligned  
 
 In our ablation study evalution, we use the [ShapeNet subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) with 16 categories and 15000 data in total.
