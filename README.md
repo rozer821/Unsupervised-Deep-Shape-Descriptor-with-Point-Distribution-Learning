@@ -34,9 +34,17 @@ Website
 ----------------
 #tolink
 
+Slides
+----------------
+[]
+
+Teaser
+----------------
+[Link](https://drive.google.com/open?id=1vBtFw_52yhU9Rjkldh4r1rQvzKEnP4__)
+
 Paper
 ----------------
-[link](https://drive.google.com/open?id=1OjtTes9h4y1X0_yZNrWCmUTsuXgI4Ev1)
+[final ver Link](https://drive.google.com/open?id=1OjtTes9h4y1X0_yZNrWCmUTsuXgI4Ev1)
 
 Reference
 ---------------
