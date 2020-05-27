@@ -16,9 +16,11 @@ During model training, we use 7 major categories from ShapeNet. Beware that the 
    
 During testing (descriptor calculation), the descriptors obtained in the previous model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. 
 
+For each dataset involved in the evaluation, the hyper parameters should be tuned for the optimal performance.  
+
 Dependencies
 -----------------
-We use Pytorch 1.3 for our model implementation.  The evalution is performed with default function provided by sklearn.
+We use Pytorch 1.3 for our model implementation.  The evalution is performed with the default function provided by sklearn.
 
 -matplotlib 
 
