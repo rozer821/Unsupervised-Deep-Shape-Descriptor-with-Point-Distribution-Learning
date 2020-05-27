@@ -36,15 +36,15 @@ Website
 
 Slides
 ----------------
-[]
+[ppt Link](https://1drv.ms/p/s!AitgHM5tER8WgXvNQRNkItrfOE6_?e=eG68fW)
 
 Teaser
 ----------------
-[Link](https://drive.google.com/open?id=1vBtFw_52yhU9Rjkldh4r1rQvzKEnP4__)
+[ppt Link](https://1drv.ms/p/s!AitgHM5tER8WghCWwZllcbrugvB4?e=qh1sx4)
 
 Paper
 ----------------
-[final ver Link](https://drive.google.com/open?id=1OjtTes9h4y1X0_yZNrWCmUTsuXgI4Ev1)
+[final ver pdf Link](https://drive.google.com/open?id=1OjtTes9h4y1X0_yZNrWCmUTsuXgI4Ev1)
 
 Reference
 ---------------
