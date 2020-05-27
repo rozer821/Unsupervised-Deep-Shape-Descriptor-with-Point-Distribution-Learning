@@ -40,7 +40,7 @@ Slides
 
 Teaser
 ----------------
-[ppt Link](https://1drv.ms/p/s!AitgHM5tER8WghCWwZllcbrugvB4?e=qh1sx4)
+[Link](https://drive.google.com/open?id=1cSuHC03yJhB2QISNpjMzAtYVPydVXkqi)
 
 Paper
 ----------------
