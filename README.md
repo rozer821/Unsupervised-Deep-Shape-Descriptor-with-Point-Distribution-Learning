@@ -18,7 +18,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 <img src="imgs/Slide9.jpg" width="500">
 </p>
 
-&nbsp; &nbsp;In the ablation study, the evalution can be conducted on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
+In the ablation study, the evalution can be conducted on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
 
 <p float="left">
 <img src="imgs/Slide10.jpg" width="400"/>
@@ -27,7 +27,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 
 Training and testing Details
 ----------------------
-&nbsp; &nbsp;The entire pipline involves two phases: decoder model training and descriptor computation. 
+The entire pipline involves two phases: decoder model training and descriptor computation. 
 
 <p align="center">
 <img src="imgs/Slide15.jpg" width="500">
