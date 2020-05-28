@@ -13,12 +13,12 @@ On contrary to using the entire ShapeNet subset which contains 55 categories and
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
 Testing: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
+<img align="right" src="imgs/Slide9.jpg" width="500">
 
 In our ablation study, we conduct the evalution on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
 
-<p align="center">
-<img src="imgs/Slide10.jpg" width="500">
-</p>
+<img align="left" src="imgs/Slide10.jpg" width="500"> <img align="right" src="imgs/Slide12.jpg" width="500">
+
 
 
 Training and testing Details
