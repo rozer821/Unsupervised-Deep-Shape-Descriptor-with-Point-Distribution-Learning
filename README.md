@@ -12,7 +12,7 @@
 &nbsp; &nbsp; On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40.
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
-Evalution: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
+Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
 
 <p align="center">
 <img src="imgs/Slide9.jpg" width="500">
@@ -27,7 +27,7 @@ Evalution: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 
 Training and testing Details
 ----------------------
-&nbsp; &nbsp; &nbsp; &nbsp;The entire pipline involves two phases: decoder model training and descriptor calculation. 
+&nbsp; &nbsp; &nbsp; &nbsp;The entire pipline involves two phases: decoder model training and descriptor computation. 
 
 <p align="center">
 <img src="imgs/Slide15.jpg" width="500">
@@ -35,9 +35,9 @@ Training and testing Details
 
 During model training, we use 7 major categories from ShapeNet. Beware that the learning rate for the descriptors should be higher than that with the decoder so that descriptors are forced to capture information rather than overfitting the decoder model itself.    
    
-During testing (descriptor calculation), the descriptors obtained in the previous model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. 
+During descriptor computation, the descriptors obtained in the previous model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. 
 
-For each dataset involved in the evaluation, the hyper parameters should be tuned for the optimal performance. The final evalution is performed with the default function provided by sklearn.
+For each dataset involved, the hyper parameters should be tuned for the optimal performance. The evaluation over generated descriptors is performed with the default function provided by sklearn.
 
 Dependencies
 -----------------
