@@ -15,7 +15,7 @@ Links
 <img src="imgs/Slide6.png" width="500">
 </p>
    
-## Data
+## Data and Experiment
 &nbsp; &nbsp; On contrary to using the entire [ShapeNet](https://www.shapenet.org/) subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40. We provide processed partial data in the following link)
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
