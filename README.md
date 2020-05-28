@@ -5,17 +5,17 @@ It contains implemetation details and important infomation for training and test
 ## Overview
 This work focuses on unsupervised 3D point cloud descriptor/feature computation. The proposed learning based approach treats each point as a Gaussian and introduces a process called 'Gaussian Sampling' which applies multiple 'disruptions' to each point. Then an auto-decoder model is leveraged to guess the original location of each point, through which the geometric information of the shape is learned. 
 
-![gs](imgs/Slide6.png | width=100px )
+![gs](imgs/Slide6.png | width=75 )
 
 ## Data
 On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40.
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
 Testing: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
-![ab1](imgs/Slide9.jpg){:height="60%" width="60%"}
+![ab1]()
 
 In our ablation study, we conduct the evalution on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
-![ab1](imgs/Slide10.jpg){:height="60%" width="60%"}
+![ab1](imgs/Slide10.jpg)
 
 Training and testing Details
 ----------------------
