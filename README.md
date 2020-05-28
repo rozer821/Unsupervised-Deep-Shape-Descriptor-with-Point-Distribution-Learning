@@ -1,15 +1,15 @@
 # Unsupervised Deep Shape Descriptor with Point Distribution Learning 
-&nbsp; &nbsp; &nbsp; &nbsp;This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. It contains implemetation details and important infomation for training and testing. The code has just been cleaned, reoredered and separated from a larger project, please make a post in Issues if you have any question about using it. 
+&nbsp; &nbsp;This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. It contains implemetation details and important infomation for training and testing. The code has just been cleaned, reoredered and separated from a larger project, please make a post in Issues if you have any question about using it. 
 
 ## Overview
-&nbsp; &nbsp; &nbsp; &nbsp;This work focuses on unsupervised 3D point cloud descriptor/feature computation. The proposed learning based approach treats each point as a Gaussian and introduces a process called 'Gaussian Sampling' which applies multiple 'disruptions' to each point. Then an auto-decoder model is leveraged to guess the original location of each point, through which the geometric information of the shape is learned. 
+&nbsp; &nbsp;This work focuses on unsupervised 3D point cloud descriptor/feature computation. The proposed learning based approach treats each point as a Gaussian and introduces a process called 'Gaussian Sampling' which applies multiple 'disruptions' to each point. Then an auto-decoder model is leveraged to guess the original location of each point, through which the geometric information of the shape is learned. 
     
 <p align="center">
 <img src="imgs/Slide6.png" width="500">
 </p>
    
 ## Data
-&nbsp; &nbsp; &nbsp; &nbsp;On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40.
+&nbsp; &nbsp; On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40.
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
 Testing: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
@@ -18,11 +18,11 @@ Testing: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 <img src="imgs/Slide9.jpg" width="500">
 </p>
 
-&nbsp; &nbsp; &nbsp; &nbsp;In our ablation study, we conduct the evalution on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
+&nbsp; &nbsp;In our ablation study, we conduct the evalution on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
 
 <p float="left">
-<img align="left" src="imgs/Slide10.jpg" width="500">
-<img align="right" src="imgs/Slide12.jpg" width="500">
+<img src="imgs/Slide10.jpg" width="500">
+<img src="imgs/Slide12.jpg" width="500">
 </p>
 
 Training and testing Details
