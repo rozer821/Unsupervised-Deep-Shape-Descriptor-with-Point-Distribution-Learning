@@ -21,8 +21,8 @@ Testing: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 &nbsp; &nbsp;In our ablation study, we conduct the evalution on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
 
 <p float="left">
-<img src="imgs/Slide10.jpg" width="500">
-<img src="imgs/Slide12.jpg" width="500">
+<img src="imgs/Slide10.jpg" width="400"/>
+<img src="imgs/Slide12.jpg" width="400"/>
 </p>
 
 Training and testing Details
@@ -33,11 +33,11 @@ Training and testing Details
 <img src="imgs/Slide15.jpg" width="500">
 </p>
 
-&nbsp; &nbsp; &nbsp; &nbsp;During model training, we use 7 major categories from ShapeNet. Beware that the learning rate for the descriptors should be higher than that with the decoder so that descriptors are forced to capture information rather than overfitting the decoder model itself.    
+During model training, we use 7 major categories from ShapeNet. Beware that the learning rate for the descriptors should be higher than that with the decoder so that descriptors are forced to capture information rather than overfitting the decoder model itself.    
    
-&nbsp; &nbsp; &nbsp; &nbsp;During testing (descriptor calculation), the descriptors obtained in the previous model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. 
+During testing (descriptor calculation), the descriptors obtained in the previous model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. 
 
-&nbsp; &nbsp; &nbsp; &nbsp;For each dataset involved in the evaluation, the hyper parameters should be tuned for the optimal performance. The final evalution is performed with the default function provided by sklearn.
+For each dataset involved in the evaluation, the hyper parameters should be tuned for the optimal performance. The final evalution is performed with the default function provided by sklearn.
 
 Dependencies
 -----------------
