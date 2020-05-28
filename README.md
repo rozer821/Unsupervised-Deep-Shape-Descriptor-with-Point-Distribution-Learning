@@ -1,9 +1,12 @@
 # Unsupervised Deep Shape Descriptor with Point Distribution Learning 
 This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. 
-It contains implemetation details and important infomation for training and testing. The code has just been cleaned, reoredered and separated from a larger project, please make a post in Issues if you have any question about using it.
+It contains implemetation details and important infomation for training and testing. The code has just been cleaned, reoredered and separated from a larger project, please make a post in Issues if you have any question about using it. 
+
+## Overview
+
 
 ## Data
-On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data in total, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on ModelNet40.
+On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40.
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
 Testing: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
@@ -34,17 +37,11 @@ Website
 ----------------
 #tolink
 
-Slides
+Links
 ----------------
-[ppt Link](https://1drv.ms/p/s!AitgHM5tER8WgXvNQRNkItrfOE6_?e=eG68fW)
-
-Teaser
-----------------
-[Link](https://drive.google.com/open?id=1cSuHC03yJhB2QISNpjMzAtYVPydVXkqi)
-
-Paper
-----------------
-[final ver pdf Link](https://drive.google.com/open?id=1OjtTes9h4y1X0_yZNrWCmUTsuXgI4Ev1)
+[Paper](https://drive.google.com/open?id=1OjtTes9h4y1X0_yZNrWCmUTsuXgI4Ev1)
+[Slides](https://1drv.ms/p/s!AitgHM5tER8WgXvNQRNkItrfOE6_?e=eG68fW)
+[Teaser](https://drive.google.com/open?id=1cSuHC03yJhB2QISNpjMzAtYVPydVXkqi)
 
 Reference
 ---------------
