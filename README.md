@@ -48,7 +48,7 @@ For each dataset involved, the hyper parameters should be tuned for the optimal 
 
 Dependencies
 -----------------
-We use Pytorch 1.3 for our model implementation.  The evalution is performed with the default function provided by sklearn.
+We use Pytorch 1.3 for our model implementation.  
 
 -matplotlib 
 
