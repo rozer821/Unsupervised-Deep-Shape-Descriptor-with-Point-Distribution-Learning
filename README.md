@@ -9,7 +9,7 @@
 </p>
    
 ## Data
-&nbsp; &nbsp; On contrary to using the entire ShapeNet subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40.
+&nbsp; &nbsp; On contrary to using the entire [ShapeNet](https://www.shapenet.org/) subset which contains 55 categories and 57,000 data, we follow the same setting as in [3DGAN](http://3dgan.csail.mit.edu/) where only seven categories from the [ShapeNet](https://www.shapenet.org/) are used in training and evaluation is on the entire ModelNet40. We provide processed partial data in the following link)
 
 Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) consist of 7 categories from ShapeNet.    
 Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
@@ -18,7 +18,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 <img src="imgs/Slide9.jpg" width="500">
 </p>
 
-&nbsp; &nbsp;In our ablation study, we conduct the evalution on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
+&nbsp; &nbsp;In the ablation study, the evalution can be conducted on the [ShapeNet set](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
 
 <p float="left">
 <img src="imgs/Slide10.jpg" width="400"/>
@@ -27,7 +27,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 
 Training and testing Details
 ----------------------
-&nbsp; &nbsp; &nbsp; &nbsp;The entire pipline involves two phases: decoder model training and descriptor computation. 
+&nbsp; &nbsp;The entire pipline involves two phases: decoder model training and descriptor computation. 
 
 <p align="center">
 <img src="imgs/Slide15.jpg" width="500">
