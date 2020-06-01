@@ -60,7 +60,7 @@ We use Pytorch 1.3 for our model implementation.
 
 Reference
 ---------------
-@article{unded2020, 
+@inproceedings{unded2020, 
   title={Unsupervised Deep Shape Descriptor with Point Distribution Learning},  
   author={Shi, Yi and Xu, Mengchen and Yuan, Shuaihang and Fang, Yi},  
   journal={},   
