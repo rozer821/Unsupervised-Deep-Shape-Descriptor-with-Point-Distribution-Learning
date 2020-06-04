@@ -25,7 +25,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 <img src="imgs/Slide9.jpg" width="500">
 </p>
 
-In the ablation study, the evalution can be conducted on our [ShapeNet subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
+In the ablation study (reconstruction, multiscale, roatation & noise invariance), the evalution is conducted on our [ShapeNet subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
 
 <p float="left">
 <img src="imgs/Slide10.jpg" width="400"/>
@@ -44,7 +44,7 @@ During model training, we use 7 major categories from ShapeNet. Beware that the 
    
 During descriptor computation, the descriptors obtained in the previous model training will be discarded. The learning rate of the descriptor will be set higher than previous stage for fast convergence while the model parameters remain fixed. 
 
-For each dataset involved, the hyper parameters should be tuned for the optimal performance. The evaluation over generated descriptors is performed with the default function provided by sklearn.
+For each dataset involved, the hyper parameters should be tuned for the optimal performance. The evaluation over generated descriptors is performed with the default function provided by sklearn. 
 
 Dependencies
 -----------------
