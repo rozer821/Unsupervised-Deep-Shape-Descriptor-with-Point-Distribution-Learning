@@ -25,7 +25,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 <img src="imgs/Slide9.jpg" width="500">
 </p>
 
-In the ablation study (reconstruction, multiscale, roatation & noise invariance), the evalution is conducted on our [ShapeNet subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) includes 16 categories and 15000 data in total.
+In the ablation study (reconstruction, multiscale, roatation & noise invariance), the evalution is conducted on our [ShapeNet subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x) containing 16 categories and 15000 data in total. The evaluattion follows a train/test split of 8:2.
 
 <p float="left">
 <img src="imgs/Slide10.jpg" width="400"/>
