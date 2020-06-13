@@ -60,12 +60,12 @@ We use Pytorch 1.3 for our model implementation.
 
 Reference
 ---------------
-@InProceedings{Xu_Shi_2020_CVPR, 
-&nbsp; &nbsp;author = {Shi, Yi and Xu, Mengchen and Yuan, Shuaihang and Fang, Yi}, 
-&nbsp; &nbsp;title = {Unsupervised Deep Shape Descriptor With Point Distribution Learning}, 
-&nbsp; &nbsp;booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, 
-&nbsp; &nbsp;month = {June}, 
-&nbsp; &nbsp;year = {2020} 
+@InProceedings{Xu_Shi_2020_CVPR,  
+&nbsp; &nbsp;author = {Shi, Yi and Xu, Mengchen and Yuan, Shuaihang and Fang, Yi},  
+&nbsp; &nbsp;title = {Unsupervised Deep Shape Descriptor With Point Distribution Learning},  
+&nbsp; &nbsp;booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},  
+&nbsp; &nbsp;month = {June},  
+&nbsp; &nbsp;year = {2020}  
 }
 
 
