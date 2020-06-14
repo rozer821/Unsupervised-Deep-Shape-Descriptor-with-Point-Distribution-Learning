@@ -1,5 +1,5 @@
 # Unsupervised Deep Shape Descriptor with Point Distribution Learning 
-&nbsp; &nbsp;This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. It contains implemetation details and important infomation for training and testing. The code has just been cleaned, reoredered and separated from a larger project. Please make a post in Issues if you have encountered any question. 
+&nbsp; &nbsp;This repository contains sampling code for the 'Unsupervised Deep Shape Descriptor with Point Distribution Learning'. This README file contains data details and important infomation for training and testing. The code has just been reoredered and separated from a larger project. Please make a post in Issues if you have encountered any question. 
 
 Useful Links
 ----------------
@@ -25,7 +25,7 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 <img src="imgs/Slide9.jpg" width="680">
 </p>
 
-In the ablation study (reconstruction, multiscale, roatation & noise invariance), the experiment is conducted on our evaluation set containing 16 categories of [ShapeNet](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x). The evaluation for classification uses a random train/test split of 8:2. 
+In the ablation study (reconstruction, multiscale, roatation & noise invariance), the experiment is conducted on our evaluation set containing 16 categories of [ShapeNet](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x). The evaluation for classification uses a random train/test split of 8:2. The classifier used in the final evaluation of computed descriptors is an MLP.
 
 <p float="left">
 <img src="imgs/Slide10.jpg" width="430"/>
