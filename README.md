@@ -22,14 +22,14 @@ Training: [A subset](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY
 Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)  
 
 <p align="center">
-<img src="imgs/Slide9.jpg" width="500">
+<img src="imgs/Slide9.jpg" width="650">
 </p>
 
 In the ablation study (reconstruction, multiscale, roatation & noise invariance), the experiment is conducted on our evaluation set containing 16 categories of [ShapeNet](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x). The evaluation for classification uses a random train/test split of 8:2. 
 
 <p float="left">
-<img src="imgs/Slide10.jpg" width="400"/>
-<img src="imgs/Slide12.jpg" width="400"/>
+<img src="imgs/Slide10.jpg" width="600"/>
+<img src="imgs/Slide12.jpg" width="600"/>
 </p>
 
 Training and testing Details
