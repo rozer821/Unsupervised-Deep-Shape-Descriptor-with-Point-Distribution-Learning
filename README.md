@@ -28,8 +28,8 @@ Evaluation: [ModelNet40 Aligned](https://modelnet.cs.princeton.edu/)
 In the ablation study (reconstruction, multiscale, roatation & noise invariance), the experiment is conducted on our evaluation set containing 16 categories of [ShapeNet](https://drive.google.com/open?id=1Pmu9e70uKBvxgBYbjU8GxuzLY3xWPc0x). The evaluation for classification uses a random train/test split of 8:2. 
 
 <p float="left">
-<img src="imgs/Slide10.jpg" width="600"/>
-<img src="imgs/Slide12.jpg" width="600"/>
+<img src="imgs/Slide10.jpg" width="490"/>
+<img src="imgs/Slide12.jpg" width="490"/>
 </p>
 
 Training and testing Details
